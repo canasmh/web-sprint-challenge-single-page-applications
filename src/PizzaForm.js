@@ -28,7 +28,20 @@ const initForm = {
     size: '',
     toppings: [],
     instructions: ''
+}
 
+const submitBtn = {
+    fontSize: "1.2rem",
+    padding: "0.8rem 3rem",
+    backgroundColor: "#FFFFFF",
+    border: "2px solid #990000",
+    color: "#990000",
+    borderRadius: "8px",
+    margin: "24px auto"
+}
+
+const buttonDiv = {
+    textAlign: "center"
 }
 
 function PizzaForm() {
@@ -152,8 +165,12 @@ function PizzaForm() {
                     <label htmlFor="special-text"><h4>Special Instructions</h4></label>
                 </div>
                 <div style={inputDiv}>
-                    <textarea rows="3" cols={50} id="special-text" name="instructions" onChange={handleChange} value={formData.instructions}></textarea>
+                    <textarea rows="3" style={{width: "100%"}} id="special-text" name="instructions" onChange={handleChange} value={formData.instructions}></textarea>
                 </div>
+                <div style={buttonDiv}>
+                    <button style={submitBtn}>Place your Order</button>
+                </div>
+                
             </form>
         </div>
     )
