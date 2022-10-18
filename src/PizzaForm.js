@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
+import axios from "axios";
 
 
 const styleDiv = {
@@ -54,6 +55,14 @@ const schema = yup.object().shape({
     instructions: yup.string()
 })
 
+const errorText = {
+    color: "red",
+    fontSize: "0.7rem",
+    fontWeight: "600",
+    display: "inline-block",
+    marginLeft: "12px"
+}
+
 
 
 function PizzaForm() {
@@ -104,12 +113,23 @@ function PizzaForm() {
             })
         }  
     }
+
+    const submitData = (event) => {
+        event.preventDefault();
+        axios.post("https://reqres.in/api/orders", formData)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(`There was an error: ${err}`)
+            })
+    }
     
     return (
         <div style={styleDiv}>
             <h3 style={{color: "#990000"}}>Build Your Own Pizza</h3>
             <img src="https://www.dogtownpizza.com/wp-content/uploads/2019/03/pepperoni-pizza-background.jpg" alt="yummy pizza" style={styleImg}/>
-            <form id="pizza-form" style={{textAlign: "left"}}>
+            <form id="pizza-form" style={{textAlign: "left"}} onSubmit={submitData}>
                 <p style={{marginLeft: "8px"}}>Build your own pizza: </p>
                 <div style={labelDiv}>
                     <label htmlFor="name-input"><h4>Please Enter Your Name</h4></label>
@@ -124,6 +144,7 @@ function PizzaForm() {
                         onChange={handleChange}
                         value={formData.name}
                     />
+                    <p style={errorText}>{errors.name}</p>
                 </div>
                 
                 <div style={labelDiv}>
@@ -188,7 +209,7 @@ function PizzaForm() {
                     <textarea rows="3" style={{width: "100%"}} id="special-text" name="instructions" onChange={handleChange} value={formData.instructions}></textarea>
                 </div>
                 <div style={buttonDiv}>
-                    <button style={submitBtn}>Place your Order</button>
+                    <button style={submitBtn} id="order-button">Place your Order</button>
                 </div>
                 
             </form>
