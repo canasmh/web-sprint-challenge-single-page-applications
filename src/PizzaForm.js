@@ -24,12 +24,7 @@ const inputDiv = {
     padding: "16px"
 }
 
-const initForm = {
-    name: '',
-    size: '',
-    toppings: [],
-    instructions: ''
-}
+
 
 const submitBtn = {
     fontSize: "1.2rem",
@@ -45,6 +40,22 @@ const buttonDiv = {
     textAlign: "center"
 }
 
+const initForm = {
+    name: '',
+    size: '',
+    toppings: [],
+    instructions: ''
+}
+
+const schema = yup.object().shape({
+    name: yup.string().required("Please enter a name for the order").min(2, "name must be at least 2 characters"),
+    size: yup.string().oneOf(["s", "m", "l", "xl"], "Please select the size of your pie"),
+    toppings: yup.array(),
+    instructions: yup.string()
+})
+
+
+
 function PizzaForm() {
 
     const [formData, setFormData] = useState(initForm)
@@ -53,6 +64,12 @@ function PizzaForm() {
     useEffect(() => {
         console.log(formData)
     }, [formData])
+
+    const setFormErrors = (name, value) => {
+        yup.reach(schema, name).validate(value)
+            .then(() => setErrors({...errors, [name]: value}))
+            .catch((error) => setErrors({...errors, [name]: error.errors[0]}))
+    }
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -64,11 +81,13 @@ function PizzaForm() {
                 const index = formData.toppings.indexOf(value);
                 const toppings = formData.toppings
                 toppings.splice(index, 1)
+                setFormErrors(name, toppings)
                 setFormData({
                     ...formData,
                     toppings: toppings
                 })
             } else if (formData.toppings.length < 5) {
+                setFormErrors(name, [...formData.toppings, value])
                 setFormData({
                     ...formData,
                     toppings: [
@@ -78,12 +97,12 @@ function PizzaForm() {
                 })
             }
         } else {
+            setFormErrors(name, value)
             setFormData({
                 ...formData,
                 [name]: value
             })
-        }
-        
+        }  
     }
     
     return (
