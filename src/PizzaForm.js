@@ -89,6 +89,7 @@ function PizzaForm() {
                         style={{width: "15rem", padding: "12px 4px"}} 
                         name="name" 
                         onChange={handleChange}
+                        value={formData.name}
                     />
                 </div>
                 
@@ -117,43 +118,42 @@ function PizzaForm() {
                 </div>
                 <div style={inputDiv}>
                     
-                    <input type="checkbox" id="pepperoni" name="toppings" style={{marginRight: "8px"}} value="pepperoni" onChange={handleChange}></input>
+                    <input type="checkbox" id="pepperoni" name="toppings" style={{marginRight: "8px"}} value="pepperoni" onChange={handleChange} checked={formData.toppings.includes("pepperoni") ? true : false}></input>
                     <label htmlFor="pepperoni">Pepperoni</label>
                     <br />
-                    <input type="checkbox" id="sausage" name="toppings" style={{marginRight: "8px"}} value="sausage" onChange={handleChange}></input>
+                    <input type="checkbox" id="sausage" name="toppings" style={{marginRight: "8px"}} value="sausage" onChange={handleChange} checked={formData.toppings.includes("sausage") ? true : false}></input>
                     <label htmlFor="sausage">Sausage</label>
                     <br />
-                    <input type="checkbox" id="chicken" name="toppings" style={{marginRight: "8px"}} value="chicken" onChange={handleChange}></input>
+                    <input type="checkbox" id="chicken" name="toppings" style={{marginRight: "8px"}} value="chicken" onChange={handleChange} checked={formData.toppings.includes("chicken") ? true : false}></input>
                     <label htmlFor="chicken">Chicken</label>
                     <br />
-                    <input type="checkbox" id="steak" name="toppings" style={{marginRight: "8px"}} value="steak" onChange={handleChange}></input>
+                    <input type="checkbox" id="steak" name="toppings" style={{marginRight: "8px"}} value="steak" onChange={handleChange} checked={formData.toppings.includes("steak") ? true : false}></input>
                     <label htmlFor="steak">Steak</label>
                     <br />
-                    <input type="checkbox" id="olives" name="toppings" style={{marginRight: "8px"}} value="olives" onChange={handleChange}></input>
+                    <input type="checkbox" id="olives" name="toppings" style={{marginRight: "8px"}} value="olives" onChange={handleChange} checked={formData.toppings.includes("olives") ? true : false}></input>
                     <label htmlFor="olives">Olives</label>
                     <br />
-                    <input type="checkbox" id="peppers" name="toppings" style={{marginRight: "8px"}} value="peppers" onChange={handleChange}></input>
+                    <input type="checkbox" id="peppers" name="toppings" style={{marginRight: "8px"}} value="peppers" onChange={handleChange} checked={formData.toppings.includes("peppers") ? true : false}></input>
                     <label htmlFor="peppers">Peppers</label>
                     <br />
-                    <input type="checkbox" id="pineapple" name="toppings" style={{marginRight: "8px"}} value="pineapple" onChange={handleChange}></input>
+                    <input type="checkbox" id="pineapple" name="toppings" style={{marginRight: "8px"}} value="pineapple" onChange={handleChange} checked={formData.toppings.includes("pineapple") ? true : false}></input>
                     <label htmlFor="pineapple">Pineapple</label>
                     <br />
-                    <input type="checkbox" id="ham" name="toppings" style={{marginRight: "8px"}} value="ham" onChange={handleChange}></input>
+                    <input type="checkbox" id="ham" name="toppings" style={{marginRight: "8px"}} value="ham" onChange={handleChange} checked={formData.toppings.includes("ham") ? true : false}></input>
                     <label htmlFor="ham">Ham</label>
                     <br />
-                    <input type="checkbox" id="oregano" name="toppings" style={{marginRight: "8px"}} value="oregano" onChange={handleChange}></input>
+                    <input type="checkbox" id="oregano" name="toppings" style={{marginRight: "8px"}} value="oregano" onChange={handleChange} checked={formData.toppings.includes("oregano") ? true : false}></input>
                     <label htmlFor="oregano">Oregano</label>
                     <br />
-                    <input type="checkbox" id="spinach" name="toppings" style={{marginRight: "8px"}} value="spinach" onChange={handleChange}></input>
+                    <input type="checkbox" id="spinach" name="toppings" style={{marginRight: "8px"}} value="spinach" onChange={handleChange} checked={formData.toppings.includes("spinach") ? true : false}></input>
                     <label htmlFor="spinach">Spinach</label>
                 </div>
                 <div style={labelDiv}>
                     <label htmlFor="special-text"><h4>Special Instructions</h4></label>
                 </div>
                 <div style={inputDiv}>
-                    <textarea rows="3" cols={50} id="special-text" name="instructions" onChange={handleChange}></textarea>
+                    <textarea rows="3" cols={50} id="special-text" name="instructions" onChange={handleChange} value={formData.instructions}></textarea>
                 </div>
-hjl
             </form>
         </div>
     )
