@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 const styleDiv = {
@@ -36,10 +36,40 @@ function PizzaForm() {
     const [formData, setFormData] = useState(initForm)
     const [errors, setErrors] = useState(initForm)
 
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
+
     const handleChange = (event) => {
-        console.log(`name: ${event.target.name}`)
-        console.log(`value: ${event.target.value}`)
-        console.log(`type: ${event.target.type}`)
+        const name = event.target.name;
+        const type = event.target.type;
+        const value = event.target.value;
+
+        if (type === "checkbox") {
+            if (formData.toppings.includes(value)) {
+                const index = formData.toppings.indexOf(value);
+                const toppings = formData.toppings
+                toppings.splice(index, 1)
+                setFormData({
+                    ...formData,
+                    toppings: toppings
+                })
+            } else if (formData.toppings.length < 5) {
+                setFormData({
+                    ...formData,
+                    toppings: [
+                        ...formData.toppings,
+                        value
+                    ]
+                })
+            }
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            })
+        }
+        
     }
     
     return (
